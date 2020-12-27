@@ -81,3 +81,11 @@ FROM tbl_ticket AS t
 WHERE t.raum = "B18" AND f.typ = "software"
 GROUP BY f.betroffeneEinrichtung
 ORDER BY Anzahl DESC
+
+    -- Verteilung der Fehleranfälligkeit bei Hardware in einem Raum (Raum: B18) --
+SELECT t.raum, f.typ, f.betroffeneEinrichtung, COUNT(f.betroffeneEinrichtung) AS Anzahl
+FROM tbl_ticket AS t
+    INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+WHERE t.raum = "B18" AND f.typ = "hardware"
+GROUP BY f.betroffeneEinrichtung
+ORDER BY Anzahl DESC
