@@ -49,3 +49,10 @@ SELECT t.ticket_id, t.raum, t.status, f.typ, f.beschreibung, f.betroffeneEinrich
 FROM tbl_ticket AS t
     INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
 WHERE raum = "B18"
+
+    -- Verteilung der Fehlertypen (Software, Hardware) eines Raums (Raum: B18) --
+SELECT t.raum, f.typ, COUNT(f.typ) AS Anzahl
+FROM tbl_ticket AS t
+    INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+WHERE RAUM = "B18"
+GROUP BY f.typ
