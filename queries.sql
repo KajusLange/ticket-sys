@@ -48,11 +48,18 @@ LIMIT 50;
 SELECT t.ticket_id, t.raum, t.status, f.typ, f.beschreibung, f.betroffeneEinrichtung
 FROM tbl_ticket AS t
     INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
-WHERE raum = "B18"
+WHERE t.raum = "B18"
 
     -- Verteilung der Fehlertypen (Software, Hardware) eines Raums (Raum: B18) --
 SELECT t.raum, f.typ, COUNT(f.typ) AS Anzahl
 FROM tbl_ticket AS t
     INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
-WHERE RAUM = "B18"
+WHERE t.raum = "B18"
 GROUP BY f.typ
+
+    -- Verteilung der Softwarefehler in einem Raum (Raum: B18) --
+SELECT t.raum, f.typ, f.beschreibung, COUNT(beschreibung) AS Anzahl
+FROM tbl_ticket AS t
+    INNER JOIN tbl_fehler AS f on t.fehler_id = f.fehler_id
+WHERE t.raum = "B18" AND f.typ = "software"
+GROUP BY beschreibung
