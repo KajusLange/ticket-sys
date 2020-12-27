@@ -56,6 +56,7 @@ FROM tbl_ticket AS t
     INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
 WHERE t.raum = "B18"
 GROUP BY f.typ
+ORDER BY Anzahl DESC
 
     -- Verteilung der Softwarefehler in einem Raum (Raum: B18) --
 SELECT t.raum, f.typ, f.beschreibung, COUNT(beschreibung) AS Anzahl
@@ -63,3 +64,12 @@ FROM tbl_ticket AS t
     INNER JOIN tbl_fehler AS f on t.fehler_id = f.fehler_id
 WHERE t.raum = "B18" AND f.typ = "software"
 GROUP BY beschreibung
+ORDER BY Anzahl DESC
+
+    -- Verteilung der Hardwarefehler in einem Raum (Raum: B18) --
+SELECT t.raum, f.typ, f.beschreibung, COUNT(beschreibung) AS Anzahl
+FROM tbl_ticket AS t
+    INNER JOIN tbl_fehler AS f on t.fehler_id = f.fehler_id
+WHERE t.raum = "B18" AND f.typ = "hardware"
+GROUP BY beschreibung
+ORDER BY Anzahl DESC
