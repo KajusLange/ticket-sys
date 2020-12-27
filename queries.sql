@@ -9,7 +9,7 @@ INSERT INTO tbl_ticket
 VALUES (2048, "B15", 1024, "Taylor, Phillip", NULL, datetime("now", "localtime"), NULL);
 
 -- Ticketstatus ändern --
-	--	Ticket in Bearbeitung setzen --
+	-- Ticket in Bearbeitung setzen --
 UPDATE tbl_ticket
 SET	status = "in Bearbeitung",
 	bearbeiter = "Nash, Ricardo"
@@ -42,3 +42,10 @@ FROM tbl_ticket
 WHERE tbl_ticket.status = "behoben"
 ORDER BY datum_erstellt ASC
 LIMIT 50;
+
+-- Fehlerauswertung eines Raums --
+    -- Alle Fehler eines Raums (Raum: B18) --
+SELECT t.ticket_id, t.raum, t.status, f.typ, f.beschreibung, f.betroffeneEinrichtung
+FROM tbl_ticket AS t
+    INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+WHERE raum = "B18"
