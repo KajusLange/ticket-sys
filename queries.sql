@@ -89,3 +89,11 @@ FROM tbl_ticket AS t
 WHERE t.raum = "B18" AND f.typ = "hardware"
 GROUP BY f.betroffeneEinrichtung
 ORDER BY Anzahl DESC
+
+-- Fehlerauswertung der gesamten Einrichtung --
+    --  Übersicht der Tickets, die im März 2020 erstellt wurden --
+SELECT t.raum, f.typ, f.betroffeneEinrichtung, t.datum_erstellt
+FROM tbl_ticket as t
+    INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+WHERE datum_erstellt BETWEEN "2020-03-01 00:00:00" AND "2020-04-01 00:00:00"
+ORDER BY datum_erstellt ASC
