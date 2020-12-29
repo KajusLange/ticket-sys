@@ -97,3 +97,10 @@ FROM tbl_ticket as t
     INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
 WHERE datum_erstellt BETWEEN "2020-03-01 00:00:00" AND "2020-04-01 00:00:00"
 ORDER BY datum_erstellt ASC
+
+    -- Rangliste der Räume mit meisten Tickets --
+SELECT t.raum, f.typ, f.betroffeneEinrichtung, t.datum_erstellt, COUNT(t.raum) AS Anzahl
+FROM tbl_ticket as t
+    INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+GROUP BY 1
+ORDER BY 5 DESC
