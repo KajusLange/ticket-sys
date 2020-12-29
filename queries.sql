@@ -113,3 +113,13 @@ WHERE datum_erstellt BETWEEN "2020-03-01 00:00:00" AND "2020-04-01 00:00:00"
 GROUP BY 1
 ORDER BY 5 DESC
 
+    -- Ganzzahliger Durchschnitt der Tickets im März 2020 --
+SELECT ROUND(AVG(Anzahl)) AS Durchschnitt
+FROM (
+         SELECT COUNT(t.raum) as Anzahl
+         FROM tbl_ticket as t
+                  INNER JOIN tbl_fehler AS f ON t.fehler_id = f.fehler_id
+         WHERE datum_erstellt BETWEEN "2020-03-01 00:00:00" AND "2020-04-01 00:00:00"
+         GROUP BY t.raum
+         ORDER BY 1 DESC
+     )
